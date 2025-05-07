@@ -131,8 +131,3 @@ Contact : [LinkedIn](#) · [GitHub](#)
 Ce projet est open-source et libre d'utilisation.
 
 ```
-
----
-
-Souhaites-tu aussi que je génère ce `README.md` dans un fichier prêt à l'emploi ?
-```
