@@ -3,13 +3,13 @@ import { User } from '../models/User';
 import { generateToken } from '../utils/jwt';
 
 export class AuthService {
-  static async register(email: string, password: string) {
+  static async register(fullname: string, email: string, password: string) {
     const existing = await User.findOne({ where: { email } });
     if (existing) throw new Error('Email already in use');
 
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hash });
-    return { id: user.id, email: user.email };
+    const user = await User.create({fullname ,email, password: hash });
+    return { fullname: user.fullname, id: user.id, email: user.email };
   }
 
   static async login(email: string, password: string) {

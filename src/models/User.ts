@@ -6,6 +6,7 @@ export class User extends Model {
   public id!: number;
   public email!: string;
   public password!: string;
+  public fullname!: string;
 }
 
 User.init(
@@ -16,6 +17,7 @@ User.init(
       autoIncrement: true,
       
     },
+    fullname: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -28,6 +30,7 @@ User.init(
   },
   {
     sequelize,
+    modelName: 'User',
     tableName: 'users',
     timestamps: false,
   }
