@@ -1,10 +1,13 @@
 // models/Examen.ts
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database';
+import Categorie from './Categorie';
 
 class Examen extends Model {
   public id!: number;
   public nom!: string;
+  public description!: string;
+  public categories?: Categorie[];
 }
 
 Examen.init(
@@ -17,6 +20,10 @@ Examen.init(
     nom: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

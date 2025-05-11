@@ -2,11 +2,13 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database';
 import Categorie from './Categorie';
+// import Parametre from './Parametre';
 
 class SousCategorie extends Model {
   public id!: number;
   public nom!: string;
   public categorieId!: number;
+//   public parametres?: Parametre[];
 }
 
 SousCategorie.init(
@@ -16,9 +18,17 @@ SousCategorie.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     nom: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    prix: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     categorieId: {
       type: DataTypes.INTEGER,
@@ -35,8 +45,5 @@ SousCategorie.init(
     tableName: 'sous_categories',
   }
 );
-
-SousCategorie.belongsTo(Categorie, { foreignKey: 'categorieId' });
-Categorie.hasMany(SousCategorie, { foreignKey: 'categorieId' });
 
 export default SousCategorie;
