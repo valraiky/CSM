@@ -1,71 +1,30 @@
-import Patient from '../models/Patient';
-import Categorie from '../models/Categorie';
-import SousCategorie from '../models/SousCategorie';
-import Resultat from '../models/Resultat';
+import Categorie from "../models/Categorie";
+import Patient from "../models/Patient";
+import Resultat from "../models/Resultat";
+import SousCategorie from "../models/SousCategorie";
 
 Categorie.hasMany(SousCategorie, { foreignKey: 'categorieId', as: 'sousCategories' });
 
-export default class PatientRepository {
-    static async getAll(){
-        return Patient.findAll();
-    }
+export class PatientRepository {
+  static async getAll(){
+    return Patient.findAll();
+  }
 
-    static async getPatientWithResults(patientId: number) {
+  static async create(data: { nom: string, prenom: string, sexe: string, date_naissance: Date, telephone: string, adresse: string, email: string, numero_dossier: string}){
+    return Patient.create(data)
+  }
 
-        const patient = await Patient.findByPk(patientId);
+  static async getById(patientId: number) {
+    return await Patient.findByPk(patientId);
+  }
 
-        if (!patient) return null;
-        
+  static async getAllCategoriesWithSousCategories() {
+    return await Categorie.findAll({
+      include: [{ model: SousCategorie, as: 'sousCategories' }],
+    });
+  }
 
-        const categories = await Categorie.findAll({
-        include: [{ model: SousCategorie, as: 'sousCategories' }],
-        });
-
-        const resultats = await Resultat.findAll({ where: { patientId } });
-
-        const cliniques: any = { categorie: {} };
-
-        for (const categorie of categories) {
-        const catResult = resultats.find(r => r.categorieId === categorie.id);
-        const sousCategories = (categorie as any).sousCategories.map((sous: any) => {
-            const sousResult = resultats.find(r => r.sousCategorieId === sous.id);
-            return {
-            id: sous.id,
-            nom: sous.nom,
-            prix: sous.prix,
-            resultat: sousResult ? { id: sousResult.id, valeur: sousResult.valeur } : null,
-            };
-        });
-
-        cliniques.categorie[categorie.nom] = {
-            id: categorie.id,
-            prix: categorie.prix,
-            resultat: catResult ? { id: catResult.id, valeur: catResult.valeur } : null,
-            sousCategories,
-        };
-        }
-
-        return {
-        id: patient.id,
-        nom: patient.nom,
-        cliniques,
-        };
-    }
+  static async getResultatsByPatient(patientId: number) {
+    return await Resultat.findAll({ where: { patientId } });
+  }
 }
-
-// import ExamenPatient from "../models/ExamenPatient";
-// import Patient from "../models/Patient"
-
-// class PatientRepository{
-    // static async getAll(){
-    //     return Patient.findAll({
-    //         include:[
-    //             {
-    //                 model: ExamenPatient,
-    //             }
-    //         ]
-    //     });
-    // }
-// }
-
-// export default PatientRepository

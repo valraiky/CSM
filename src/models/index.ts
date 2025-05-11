@@ -44,10 +44,6 @@ Resultat.belongsTo(Categorie, { foreignKey: 'categorieId' });
 SousCategorie.hasMany(Resultat, { foreignKey: 'sousCategorieId' });
 Resultat.belongsTo(SousCategorie, { foreignKey: 'sousCategorieId' });
 
-
-
-
-// Gestion de Examen
 db.Categorie.belongsTo(db.Examen, { foreignKey: 'examenId' });
 db.Examen.hasMany(db.Categorie, { foreignKey: 'examenId' });
 

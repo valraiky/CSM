@@ -119,10 +119,32 @@ npm start
 
 ---
 
+# 🏥 API Résultats Cliniques - Centre de Santé
+
+Cette API permet de récupérer les résultats des examens (cliniques, paracliniques, etc.) d'un patient, organisés par catégories et sous-catégories.
+
+API Endpoint
+🔍 Récupérer les résultats d’un patient
+bash
+Copier
+Modifier
+GET /patients/:id/structure
+
+📥 Paramètres
+id (number) — ID du patient à rechercher.
+
+| Code | Description               |
+| ---- | ------------------------- |
+| 404  | Patient non trouvé        |
+| 500  | Erreur interne du serveur |
+
+
+
 ## 📫 Auteur
 
 Développé par **Natrefindazana Valeurin**
-Contact : [LinkedIn](#) · [GitHub](#)
+Email : [valeurinpavart@.com]
+Github : https://github.com/valraiky
 
 ---
 

@@ -7,6 +7,7 @@ import categoriesRoutes from './routes/categoriesRoutes';
 import examenPatientRoutes from './routes/examenPatientRoutes'
 import patientRoutes from './routes/patientRoutes';
 import sousCategoriesROutes from './routes/sousCategoriesRoutes';
+import resultatRoutes from './routes/ResultatRoute';
 import passport from './middlewares/passport';
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use('/api/categories', categoriesRoutes);
 app.use('/api/sousCategories', sousCategoriesROutes);
 app.use('/api/examenPatient', examenPatientRoutes);
 app.use('/api/patients', patientRoutes);
+app.use('/api/resultats', resultatRoutes);
 
 const PORT = process.env.PORT || 3000;
 
